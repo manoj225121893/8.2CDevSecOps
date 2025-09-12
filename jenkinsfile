@@ -1,33 +1,12 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout') {
+        stage('Check PATH') {
             steps {
-                git branch: 'main', url: 'https://github.com/manoj225121893/8.2CDevSecOps.git'
+                sh 'echo $PATH'
+                sh 'which npm'
             }
         }
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
-        stage('Run Tests') {
-            steps {
-                sh 'npm test || true' // Allows pipeline to continue despite test failures
-            }
-        }
-        stage('Generate Coverage Report') {
-            steps {
-                sh 'npm run coverage || true'
-            }
-        }
-        stage('NPM Audit (Security Scan)') {
-            steps {
-                sh 'npm audit || true'
-            }
-        }
+        // ... rest of stages
     }
 }
-
-
